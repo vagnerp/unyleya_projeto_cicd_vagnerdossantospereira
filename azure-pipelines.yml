@@ -19,10 +19,8 @@ variables:
   buildConfiguration: 'Release'
   dockerRegistryServiceConnection: 'DockerConect'
   imageRepository: 'vagnerp/mobead'
-<<<<<<< HEAD
   tag: '$(Build.BuildId)'
-=======
->>>>>>> ae06ed8a61d5783ecd3cd954d286b4926e80d320
+
 
 
 
@@ -32,6 +30,7 @@ steps:
 # Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
 
 - task: Docker@2
+  displayName: 'Build and push image to Docker Hub'
   inputs:
     containerRegistry: '$(dockerRegistryServiceConnection)'
     repository: '$(imageRepository)'
@@ -40,9 +39,9 @@ steps:
     tags: |
       $(tag)
       latest
-    script: 'mkdir d:\a\1\MobEAD' 
-    #workingDirectory: # Optional
-    #failOnStderr: false # Optional
+#    script: 'mkdir d:\a\1\MobEAD' 
+#    #workingDirectory: # Optional
+#    #failOnStderr: false # Optional
 
 - task: NuGetToolInstaller@1
 - task: NuGetCommand@2
