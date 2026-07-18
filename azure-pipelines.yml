@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 # Command line
 # Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
@@ -17,6 +17,8 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  dockerRegistryServiceConnection: 'DockerConect'
+  imageRepository: 'vagnerp/mobead'
 
 
 
@@ -25,11 +27,18 @@ steps:
 # Command line
 # Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
 
-- task: CmdLine@2
+- task: Docker@2
   inputs:
-    script: 'mkdir d:\a\1\MobEAD' 
-    #workingDirectory: # Optional
-    #failOnStderr: false # Optional
+    containerRegistry: '$(dockerRegistryServiceConnection)'
+    repository: '$(imageRepository)'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: |
+      $(tag)
+      latest
+#    script: 'mkdir d:\a\1\MobEAD' 
+#    #workingDirectory: # Optional
+#    #failOnStderr: false # Optional
 
 - task: NuGetToolInstaller@1
 - task: NuGetCommand@2
