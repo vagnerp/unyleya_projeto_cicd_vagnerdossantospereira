@@ -36,9 +36,9 @@ steps:
     tags: |
       $(tag)
       latest
-#    script: 'mkdir d:\a\1\MobEAD' 
-#    #workingDirectory: # Optional
-#    #failOnStderr: false # Optional
+    script: 'mkdir d:\a\1\MobEAD' 
+    #workingDirectory: # Optional
+    #failOnStderr: false # Optional
 
 - task: NuGetToolInstaller@1
 - task: NuGetCommand@2
