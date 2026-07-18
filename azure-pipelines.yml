@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 # Command line
 # Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
@@ -19,7 +19,10 @@ variables:
   buildConfiguration: 'Release'
   dockerRegistryServiceConnection: 'DockerConect'
   imageRepository: 'vagnerp/mobead'
+<<<<<<< HEAD
   tag: '$(Build.BuildId)'
+=======
+>>>>>>> ae06ed8a61d5783ecd3cd954d286b4926e80d320
 
 
 
@@ -30,6 +33,13 @@ steps:
 
 - task: Docker@2
   inputs:
+    containerRegistry: '$(dockerRegistryServiceConnection)'
+    repository: '$(imageRepository)'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: |
+      $(tag)
+      latest
     script: 'mkdir d:\a\1\MobEAD' 
     #workingDirectory: # Optional
     #failOnStderr: false # Optional
