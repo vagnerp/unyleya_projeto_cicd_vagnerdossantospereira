@@ -1,3 +1,8 @@
+variable "docker_hub_token" {
+  type      = string
+  sensitive = true
+}
+
 terraform {
   required_providers {
     azurerm = {
@@ -43,10 +48,11 @@ resource "azurerm_linux_web_app" "app" {
     }
   }
   app_settings = {
-    WEBSITES_PORT = "80"
+     WEBSITES_PORT                    = "80"
+     DOCKER_REGISTRY_SERVER_URL       = "https://index.docker.io"
+     DOCKER_REGISTRY_SERVER_USERNAME  = "vagnerp"
+     DOCKER_REGISTRY_SERVER_PASSWORD  = var.docker_hub_token
   }
-
-
 }
 
 output "app_url" {
