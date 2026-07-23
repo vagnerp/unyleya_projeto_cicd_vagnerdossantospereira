@@ -42,6 +42,11 @@ resource "azurerm_linux_web_app" "app" {
       docker_registry_url = "https://index.docker.io"
     }
   }
+  app_settings = {
+    WEBSITES_PORT = "80"
+  }
+
+
 }
 
 output "app_url" {
